@@ -4,11 +4,11 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddPeriodetoPosyandu extends Migration
+class AddKelurahantoPosyandu extends Migration
 {
     public function up()
     {
-        $this->forge->addColumn('periode', [
+        $this->forge->addColumn('posyandu', [
             'kelurahan_id' => [
                 'type' => 'INT',
             ]

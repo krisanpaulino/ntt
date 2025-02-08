@@ -12,12 +12,12 @@ class ApiTimbang extends BaseController
 {
     use ResponseTrait;
 
-    public function periode($posyandu_id)
+    public function periode($kelurahan_id)
     {
         // if (session('user')->role_id == 3)
         //     $this->model->where('rt_id', session('user')->rt_id);
         $model = new PeriodeModel();
-        $data = $model->findUrutan($posyandu_id);
+        $data = $model->findUrutan($kelurahan_id);
         if ($data != null) {
             return $this->respond($data, 200);
         }
