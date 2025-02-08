@@ -50,10 +50,10 @@ class PeriodeModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function findBuka($posyandu_id = null)
+    public function findBuka($kelurahan_id = null)
     {
-        if ($posyandu_id != null)
-            $this->where('posyandu_id', $posyandu_id);
+        if ($kelurahan_id != null)
+            $this->where('kelurahan_id', $kelurahan_id);
         $this->where('periode_status', 'buka');
         return $this->first();
     }

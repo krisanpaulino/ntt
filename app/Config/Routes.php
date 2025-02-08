@@ -25,6 +25,7 @@ $routes->put('api/balita/(:num)', 'Apibalita::update/$1');
 $routes->delete('api/balita/(:num)', 'Apibalita::delete/$1');
 
 $routes->get('api/periode/(:num)', 'Apitimbang::periode/$1');
+$routes->post('api/timbang', 'Apitimbang::timbang');
 
 
 $routes->group('admin', ['filter' => 'admin'], static function ($routes) {

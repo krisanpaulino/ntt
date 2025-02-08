@@ -3,10 +3,13 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\BalitaModel;
+use App\Models\HasilukurModel;
 use App\Models\MasterModel;
 use App\Models\PeriodeModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\API\ResponseTrait;
+use DateTime;
 
 class ApiTimbang extends BaseController
 {
@@ -42,13 +45,34 @@ class ApiTimbang extends BaseController
         }
         return $this->fail($model->errors());
     }
-    function jenisSampahShow($id)
+    function timbang()
     {
-        $data = $this->model->getJenis($id);
-        if ($data)
-            return $this->respond($data, 200);
-        else
-            return $this->failNotFound('Data tidak ditemukan untuk id $id');
+        $data = $this->request->getVar();
+        // $data = (array)$data;
+        //Dapatkan Data Balita
+        $model = new BalitaModel();
+        $balita = $model->find($data['balita_id']);
+
+        //Hitung umur timbang balita
+        // $tgllahir = new DateTime($balita['balita_tgllahir']);
+        // $now = new DateTime($data['hasilukur_tgl']);
+        // $diff = $now->diff($tgllahir);
+
+        // $data['hasilukur_umur'] = ($diff->y * 12) + $diff->m;
+        // $data['hasilukur_tgl'] = date('Y-m-d');
+        $model = new HasilukurModel();
+        if ($hasilukur_id = $model->insert($data, true)) {
+            $response = [
+                'status' => 201,
+                'error' => null,
+                'messages' => [
+                    'success' => 'Data penimbangan ditambahkan'
+                ],
+                'data' => (array)$data
+            ];
+            return $this->respond($response);
+        } else
+            return $this->fail($model->errors());
     }
     public function kategoriSampah()
     {
