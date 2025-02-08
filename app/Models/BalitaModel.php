@@ -81,6 +81,13 @@ class BalitaModel extends Model
         $this->where('balita.dusun_id', $dusun_id);
         return $this->find();
     }
+    public function byPosyandu($posyandu_id)
+    {
+        $this->join('dusun', 'dusun.dusun_id = balita.dusun_id');
+        $this->join('kelurahan', 'dusun.kelurahan_id = kelurahan.kelurahan_id');
+        $this->where('dusun.posyandu_id', $posyandu_id);
+        return $this->find();
+    }
 
     public function belumPeriksa($periode_id, $posyandu_id = null)
     {

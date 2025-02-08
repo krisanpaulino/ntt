@@ -18,10 +18,14 @@ $routes->post('otentikasi', 'Otentikasi::index');
 //API
 $routes->get('api/master/dusun/(:num)', 'Apimaster::dusun/$1');
 $routes->get('api/balita-kelurahan/(:num)', 'Apibalita::balitaKelurahan/$1');
+$routes->get('api/balita-posyandu/(:num)', 'Apibalita::balitaPosyandu/$1');
 $routes->get('api/balita/(:num)', 'Apibalita::show/$1');
 $routes->post('api/balita', 'Apibalita::create');
 $routes->put('api/balita/(:num)', 'Apibalita::update/$1');
 $routes->delete('api/balita/(:num)', 'Apibalita::delete/$1');
+
+$routes->get('api/periode/(:num)', 'Apitimbang::periode/$1');
+
 
 $routes->group('admin', ['filter' => 'admin'], static function ($routes) {
     $routes->get('/', 'Home::admin');

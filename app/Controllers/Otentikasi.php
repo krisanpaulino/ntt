@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\PetugasdesaModel;
+use App\Models\PetugasModel;
 use App\Models\UserModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\API\ResponseTrait;
@@ -43,6 +44,10 @@ class Otentikasi extends BaseController
         if ($data->user_type == 'petugasdesa') {
             $pmodel = new PetugasdesaModel();
             $data->petugasdesa = $pmodel->findUserPetugas($data->user_id);
+        }
+        if ($data->user_type == 'petugas') {
+            $pmodel = new PetugasModel();
+            $data->petugasposyandu = $pmodel->findUserPetugas($data->user_id);
         }
         if (!password_verify($password, $data->user_password)) {
             return $this->fail('Password tidak sesuai');

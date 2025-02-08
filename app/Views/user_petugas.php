@@ -64,7 +64,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="myModalLabel">Tambah Petugas</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
 
@@ -103,7 +105,7 @@
 
                     <div class="form-group mb-4">
                         <label for="petugas_tgllahir">Tanggal Lahir</label>
-                        <input data-inputmask="'alias': 'datetime'" data-inputmask-inputformat="dd-mm-yyyy" class="form-control input-mask <?= (isset(session('errors')['petugas_tgllahir'])) ? 'is-invalid' : '' ?>" id="petugas_tgllahir" name="petugas_tgllahir" value="<?= old('petugas_tgllahir') ?>">
+                        <input type="date" class="form-control input-mask <?= (isset(session('errors')['petugas_tgllahir'])) ? 'is-invalid' : '' ?>" id="petugas_tgllahir" name="petugas_tgllahir" value="<?= old('petugas_tgllahir') ?>">
                         <div class="invalid-feedback">
                             <?php if (isset(session('errors')['petugas_tgllahir'])) : ?>
                                 <?= session('errors')['petugas_tgllahir'] ?>

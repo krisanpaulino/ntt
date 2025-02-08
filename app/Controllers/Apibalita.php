@@ -30,6 +30,13 @@ class Apibalita extends BaseController
         $data = $this->model->findBalita(null, $kelurahan_id);
         return $this->respond($data, 200);
     }
+    public function balitaPosyandu($posyandu_id)
+    {
+        // if (session('user')->role_id == 3)
+        //     $this->model->where('rt_id', session('user')->rt_id);
+        $data = $this->model->byPosyandu($posyandu_id);
+        return $this->respond($data, 200);
+    }
     function show($id = null)
     {
         $data = $this->model->findBalita($id);

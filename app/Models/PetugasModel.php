@@ -15,7 +15,15 @@ class PetugasModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'petugas_nama', 'petugas_jk', 'petugas_tempatlahir', 'petugas_tgllahir', 'petugas_alamat', 'petugas_hp', 'user_id', 'posyandu_id', 'petugas_foto'
+        'petugas_nama',
+        'petugas_jk',
+        'petugas_tempatlahir',
+        'petugas_tgllahir',
+        'petugas_alamat',
+        'petugas_hp',
+        'user_id',
+        'posyandu_id',
+        'petugas_foto'
     ];
 
     // Dates
@@ -57,6 +65,18 @@ class PetugasModel extends Model
         $this->join('posyandu', 'posyandu.posyandu_id = petugas.posyandu_id');
         if ($petugas_id != null) {
             $this->where('petugas_id', $petugas_id);
+            return $this->first();
+        } else {
+            return $this->find();
+        }
+    }
+    public function findUserPetugas($user_id = null)
+    {
+
+        $this->join('user', 'user.user_id = petugas.user_id');
+        $this->join('posyandu', 'posyandu.posyandu_id = petugas.posyandu_id');
+        if ($user_id != null) {
+            $this->where('petugas.user_id', $user_id);
             return $this->first();
         } else {
             return $this->find();

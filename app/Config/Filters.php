@@ -91,7 +91,9 @@ class Filters extends BaseFilters
                     'petugas',
                     'petugasdesa',
                     'auth',
-                    'auth/*'
+                    'auth/*',
+                    'logout',
+                    'login'
                 ],
 
             ],

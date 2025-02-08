@@ -18,6 +18,7 @@ class PeriodeModel extends Model
         'periode_bulan',
         'periode_tahun',
         'periode_status',
+        'posyandu_id',
     ];
 
     // Dates
@@ -32,6 +33,7 @@ class PeriodeModel extends Model
         'periode_bulan' => 'required',
         'periode_tahun' => 'required',
         'periode_status' => 'required',
+        'posyandu_id' => 'required',
     ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
@@ -48,13 +50,17 @@ class PeriodeModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function findBuka()
+    public function findBuka($posyandu_id = null)
     {
+        if ($posyandu_id != null)
+            $this->where('posyandu_id', $posyandu_id);
         $this->where('periode_status', 'buka');
         return $this->first();
     }
-    public function findUrutan()
+    public function findUrutan($posyandu_id = null)
     {
+        if ($posyandu_id != null)
+            $this->where('posyandu_id', $posyandu_id);
         $this->orderBy('periode_id', 'desc');
         return $this->find();
     }
