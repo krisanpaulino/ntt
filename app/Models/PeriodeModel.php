@@ -57,10 +57,10 @@ class PeriodeModel extends Model
         $this->where('periode_status', 'buka');
         return $this->first();
     }
-    public function findUrutan($posyandu_id = null)
+    public function findUrutan($kelurahan_id = null)
     {
-        if ($posyandu_id != null)
-            $this->where('posyandu_id', $posyandu_id);
+        if ($kelurahan_id != null)
+            $this->where('kelurahan_id', $kelurahan_id);
         $this->orderBy('periode_id', 'desc');
         return $this->find();
     }
