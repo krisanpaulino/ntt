@@ -54,6 +54,7 @@ class MasterModel extends Model
         // $db = \Config\Database::connect();
         $builder = $this->db->table('dusun');
         $builder->join('kelurahan', 'dusun.kelurahan_id = kelurahan.kelurahan_id');
+        $builder->join('posyandu', 'dusun.posyandu_id = posyandu.posyandu_id');
         if ($kelurahan_id != null) {
             $builder->where('kelurahan.kelurahan_id', $kelurahan_id);
             // return $builder->get()->getRowObject();
@@ -148,8 +149,7 @@ class MasterModel extends Model
     {
         $builder = $this->db->table($table);
         $builder->where($table . '_id', $id);
-        $builder->set('deleted', '1');
-        return $builder->update();
+        return $builder->delete();
     }
     function getGaleri()
     {

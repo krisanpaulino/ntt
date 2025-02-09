@@ -6,6 +6,7 @@ use App\Filters\AdminFilter;
 use App\Filters\JwtFilter;
 use App\Filters\PetugasdesaFilter;
 use App\Filters\PetugasFilter;
+use App\Filters\SuperadminFilter;
 use CodeIgniter\Config\Filters as BaseFilters;
 use CodeIgniter\Filters\Cors;
 use CodeIgniter\Filters\CSRF;
@@ -39,6 +40,7 @@ class Filters extends BaseFilters
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
         'jwtfilter' => JwtFilter::class,
+        'superadmin' => SuperadminFilter::class,
         'admin' => AdminFilter::class,
         'petugas' => PetugasFilter::class,
         'petugasdesa' => PetugasdesaFilter::class
@@ -86,6 +88,8 @@ class Filters extends BaseFilters
                     'otentikasi',
                     'admin/*',
                     'admin',
+                    'superadmin/*',
+                    'superadmin',
                     'petugas/*',
                     'petugasdesa/*',
                     'petugas',

@@ -79,6 +79,14 @@ class Auth extends BaseController
                 session()->set($data);
                 return redirect()->to('admin');
                 break;
+            case 'superadmin':
+                $data = [
+                    'user' => $user,
+                    'superadmin_logged_in' => 1,
+                ];
+                session()->set($data);
+                return redirect()->to('admin');
+                break;
             default:
                 return redirect()->to('/');
                 break;

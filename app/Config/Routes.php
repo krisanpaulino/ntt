@@ -52,6 +52,16 @@ $routes->group('superadmin', ['filter' => 'superadmin'], static function ($route
     $routes->post('kelurahan/tambah', 'Master::savekelurahan');
     $routes->post('kelurahan/hapus', 'Master::deletekelurahan');
 
+    $routes->get('dusun/(:num)', 'Master::dusun/$1');
+    $routes->post('dusun/update', 'Master::savedusun');
+    $routes->post('dusun/tambah', 'Master::savedusun');
+    $routes->post('dusun/hapus', 'Master::deletedusun');
+
+    $routes->get('posyandu/(:num)', 'Master::posyandu/$1');
+    $routes->post('posyandu/update', 'Master::saveposyandu');
+    $routes->post('posyandu/tambah', 'Master::saveposyandu');
+    $routes->post('posyandu/hapus', 'Master::deleteposyandu');
+
     $routes->get('petugas', 'User::petugas');
     $routes->post('petugas/tambah', 'User::storePetugas');
     $routes->get('petugas/(:num)', 'User::detailPetugas/$1');

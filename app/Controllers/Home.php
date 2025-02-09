@@ -24,6 +24,27 @@ class Home extends BaseController
         return view('frontend/dashboard', $data);
         // return redirect('auth');
     }
+    public function superadmin()
+    {
+        $model = new PeriodeModel();
+        $periode = $model->findBuka();
+        if (empty($periode)) {
+            $model->where('periode_status', 'selesai');
+            $model->orderBy('periode_id', 'desc');
+            $periode = $model->first();
+        }
+
+        $model = new BalitaModel();
+        $jumlah_balita = $model->findJumlahBalita();
+        $model = new HasilukurModel();
+        // $status_gizi = $model->findJumlah($periode->periode_id);
+        $data['jumlah_balita'] = $jumlah_balita;
+        $data['periode'] = $periode;
+        // $data['status_gizi'] = $status_gizi;
+        $data['title'] = 'Dashboard';
+
+        return view('dashboard_superadmin', $data);
+    }
     public function admin()
     {
         $model = new PeriodeModel();

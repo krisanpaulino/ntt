@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\AdminModel;
 use App\Models\MasterModel;
 use App\Models\PetugasdesaModel;
 use App\Models\PetugasModel;
@@ -12,37 +13,37 @@ use DateTime;
 
 class User extends BaseController
 {
-    public function admin()
-    {
-        $model = new UserModel();
-        $data['title'] = 'Data Admin';
-        $data['users'] = $model->findAdmins();
+    // public function admin()
+    // {
+    //     $model = new UserModel();
+    //     $data['title'] = 'Data Admin';
+    //     $data['users'] = $model->findAdmins();
 
-        return view('pengguna/admin', $data);
-    }
+    //     return view('pengguna/admin', $data);
+    // }
 
-    public function storeAdmin()
-    {
-        $data = $this->request->getPost();
-        $data['user_type'] = 'admin';
-        $model = new UserModel();
-        if ($model->insert($data)) {
-            return redirect()->back();
-        } else {
-            // dd($model->errors()['password_confirmation']);
-            return redirect()->back()
-                ->with('errors', $model->errors())
-                ->withInput();
-        }
-    }
+    // public function storeAdmin()
+    // {
+    //     $data = $this->request->getPost();
+    //     $data['user_type'] = 'admin';
+    //     $model = new UserModel();
+    //     if ($model->insert($data)) {
+    //         return redirect()->back();
+    //     } else {
+    //         // dd($model->errors()['password_confirmation']);
+    //         return redirect()->back()
+    //             ->with('errors', $model->errors())
+    //             ->withInput();
+    //     }
+    // }
 
-    public function deleteAdmin()
-    {
-        $model = new UserModel();
-        $user_id = $this->request->getPost('user_id');
-        $model->delete($user_id);
-        return redirect()->to('admin/admin');
-    }
+    // public function deleteAdmin()
+    // {
+    //     $model = new UserModel();
+    //     $user_id = $this->request->getPost('user_id');
+    //     $model->delete($user_id);
+    //     return redirect()->to('admin/admin');
+    // }
 
     public function petugas()
     {
@@ -231,5 +232,99 @@ class User extends BaseController
         $user_id = $this->request->getPost('user_id');
         $model->delete($user_id);
         return redirect()->to('admin/petugasdesa');
+    }
+
+    public function admin()
+    {
+        $model = new AdminModel();
+        $pmodel = new MasterModel();
+        $data = [
+            'title' => 'Data Admin',
+            'admin' => $model->findAdmin(),
+            'kelurahan' => $pmodel->getKelurahan()
+        ];
+        return view('user_admin', $data);
+    }
+
+    public function storeAdmin()
+    {
+        $user =  [
+            'user_email' => $this->request->getPost('user_email'),
+            'user_password' => $this->request->getPost('user_password'),
+            'password_confirmation' => $this->request->getPost('password_confirmation'),
+            'user_type' => 'admin'
+        ];
+        // dd($user);
+        $umodel = new UserModel();
+
+        //simpan dulu data user
+        if ($user_id = $umodel->insert($user, true)) {
+            // dd($user_id);
+            $tgllahir = (string)$this->request->getPost('admin_tgllahir');
+            $date = new DateTime($tgllahir);
+
+            $data = [
+                'admin_nama' => $this->request->getPost('admin_nama'),
+                'admin_jk' => $this->request->getPost('admin_jk'),
+                'admin_tempatlahir' => $this->request->getPost('admin_tempatlahir'),
+                'admin_tgllahir' => date('Y-m-d', strtotime($date->format('Y-m-d'))),
+                'admin_alamat' => $this->request->getPost('admin_alamat'),
+                'admin_hp' => $this->request->getPost('admin_hp'),
+                'kelurahan_id' => $this->request->getPost('kelurahan_id'),
+                'user_id' => $user_id
+            ];
+
+            $pmodel = new AdminModel();
+            $data['admin_foto'] = 'default.jpg';
+
+
+            if ($pmodel->insert($data)) {
+                return redirect()->to(previous_url())->with('success', 'Data Admin Ditambahkan !');
+            }
+            $umodel->where('user_id', $user_id)->delete();
+            dd($pmodel->errors());
+            return redirect()->to(previous_url())->with('danger', 'Data Admin Gagal Ditambahkan !')
+                ->with('errors', $pmodel->errors())
+                ->withInput();
+        } else {
+            dd($umodel->errors());
+        }
+    }
+    public function detailAdmin($admin_id)
+    {
+        $model = new AdminModel();
+        $admin = $model->findPetugas($admin_id);
+        $model = new PosyanduModel();
+        $data = [
+            'title' => 'Detail Petugas',
+            'admin' => $admin,
+            // 'kel' => $model->findAll()
+        ];
+
+        return view('pengguna/petugas-detail', $data);
+    }
+    public function updateAdmin()
+    {
+        $admin_id = $this->request->getPost('admin_id');
+        $data = $this->request->getPost();
+        $tgllahir = $this->request->getPost('admin_tgllahir');
+        // dd($tgllahir);
+        // $date = new DateTime($tgllahir);
+        // dd(date('Y-m-d', strtotime($tgllahir)));
+        $data['admin_tgllahir'] = date('Y-m-d', strtotime($tgllahir));
+        // dd($data);
+        $model = new AdminModel();
+
+        // dd($data);
+        $model->where('admin_id', $admin_id);
+        $model->update($admin_id, $data);
+        return redirect()->to(previous_url())->with('success', 'Data berhasil diubah');
+    }
+    public function deleteAdmin()
+    {
+        $model = new UserModel();
+        $user_id = $this->request->getPost('user_id');
+        $model->delete($user_id);
+        return redirect()->to('admin/admin');
     }
 }
