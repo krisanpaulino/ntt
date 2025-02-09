@@ -47,7 +47,7 @@ class Apibalita extends BaseController
     }
     function create()
     {
-        $data = $this->request->getVar();
+        $data = (array)$this->request->getVar();
         //Hitung umur
         $tgllahir = new DateTime($data['balita_tgllahir']);
         $now = new DateTime(date('Y-m-d'));
