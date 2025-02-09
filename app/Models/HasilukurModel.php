@@ -62,7 +62,7 @@ class HasilukurModel extends Model
     {
         $this->where('balita_id', $balita_id);
         $this->where('periode_id', $periode_id);
-        $this->join('statusgizi', 'statusgizi.statusgizi_id = hasilukur.hasilukur_status', 'left');
+        // $this->join('statusgizi', 'statusgizi.statusgizi_id = hasilukur.hasilukur_status', 'left');
         return $this->first();
     }
 
@@ -72,7 +72,7 @@ class HasilukurModel extends Model
         $this->join('posyandu', 'balita.posyandu_id = posyandu.posyandu_id');
         $this->where('balita.posyandu_id', $posyandu_id);
         $this->where('hasilukur.periode_id', $periode_id);
-        $this->join('statusgizi', 'statusgizi.statusgizi_id = hasilukur.hasilukur_status', 'left');
+        // $this->join('statusgizi', 'statusgizi.statusgizi_id = hasilukur.hasilukur_status', 'left');
         return $this->find();
     }
 
@@ -88,7 +88,7 @@ class HasilukurModel extends Model
 
     public function byBalita($balita_id)
     {
-        $this->join('statusgizi', 'statusgizi.statusgizi_id = hasilukur.hasilukur_status', 'left');
+        // $this->join('statusgizi', 'statusgizi.statusgizi_id = hasilukur.hasilukur_status', 'left');
         $this->join('periode', 'periode.periode_id = hasilukur.periode_id');
         $this->where('balita_id', $balita_id);
         $this->orderBy('hasilukur.periode_id', 'asc');

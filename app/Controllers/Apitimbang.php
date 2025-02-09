@@ -27,6 +27,18 @@ class ApiTimbang extends BaseController
         return $this->failNotFound('Tidak ada periode');
     }
 
+    public function riwayat($balita_id)
+    {
+        // if (session('user')->role_id == 3)
+        //     $this->model->where('rt_id', session('user')->rt_id);
+        $model = new HasilukurModel();
+        $data = $model->byBalita($balita_id);
+        if ($data != null) {
+            return $this->respond($data, 200);
+        }
+        return $this->failNotFound('Tidak ada periode');
+    }
+
     function createPeriode()
     {
         $data = $this->request->getVar();
