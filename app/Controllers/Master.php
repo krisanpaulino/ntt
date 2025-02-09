@@ -117,23 +117,40 @@ class Master extends BaseController
     //end kelurahan
 
     //Dususn
-    function dusun($kelurahan_id)
+    function dusun($kelurahan_id = null)
     {
         $model = new MasterModel();
-        $kelurahan = $model->detail($kelurahan_id, 'kelurahan');
-        $kecamatan = $model->detail($kelurahan->kecamatan_id, 'kecamatan');
-        $kabupaten = $model->detail($kecamatan->kabupaten_id, 'kabupaten');
-        $pModel = new PosyanduModel();
-        $posyandu = $pModel->byKelurahan($kelurahan_id);
+        if ($kelurahan_id != null) {
+            $kelurahan = $model->detail($kelurahan_id, 'kelurahan');
+            $kecamatan = $model->detail($kelurahan->kecamatan_id, 'kecamatan');
+            $kabupaten = $model->detail($kecamatan->kabupaten_id, 'kabupaten');
+            $pModel = new PosyanduModel();
+            $posyandu = $pModel->byKelurahan($kelurahan_id);
 
-        $data = [
-            'title' => 'Data Dusun',
-            'dusun' => $model->getDusun($kelurahan_id),
-            'kelurahan' => $kelurahan,
-            'kecamatan' => $kecamatan,
-            'kabupaten' => $kabupaten,
-            'posyandu' => $posyandu
-        ];
+            $data = [
+                'title' => 'Data Dusun',
+                'dusun' => $model->getDusun($kelurahan_id),
+                'kelurahan' => $kelurahan,
+                'kecamatan' => $kecamatan,
+                'kabupaten' => $kabupaten,
+                'posyandu' => $posyandu
+            ];
+        } else {
+            $admin = admin();
+            $kelurahan = $model->detail($admin->kelurahan_id, 'kelurahan');
+            // $kecamatan = $model->detail($kelurahan->kecamatan_id, 'kecamatan');
+            // $kabupaten = $model->detail($kecamatan->kabupaten_id, 'kabupaten');
+            $pModel = new PosyanduModel();
+            $posyandu = $pModel->byKelurahan($admin->kelurahan_id);
+
+            $data = [
+                'title' => 'Data Dusun',
+                'dusun' => $model->getDusun($admin->kelurahan_id),
+                'kelurahan' => $kelurahan,
+                'posyandu' => $posyandu
+            ];
+        }
+
         return view('master_dusun', $data);
     }
     function savedusun()
@@ -145,6 +162,8 @@ class Master extends BaseController
         $id = $this->request->getPost('dusun_id');
         if ($id == null)
             $data['kelurahan_id'] = $this->request->getPost('kelurahan_id');
+        if (user()->user_type == 'admin')
+            $data['kelurahan_id'] = admin()->kelurahan_id;
         $model = new MasterModel();
         if (!$model->saveData('dusun', $id, $data))
             return redirect()->back()->with('danger', 'Data tidak dapat disimpan! Terjadi kesalahan')->with('errors', $model->errors());
@@ -162,22 +181,36 @@ class Master extends BaseController
     //end dusun
 
     //Posyandu
-    function posyandu($kelurahan_id)
+    function posyandu($kelurahan_id = null)
     {
         $model = new MasterModel();
-        $kelurahan = $model->detail($kelurahan_id, 'kelurahan');
-        $kecamatan = $model->detail($kelurahan->kecamatan_id, 'kecamatan');
-        $kabupaten = $model->detail($kecamatan->kabupaten_id, 'kabupaten');
-        $pModel = new PosyanduModel();
-        $posyandu = $pModel->byKelurahan($kelurahan_id);
+        if ($kelurahan_id != null) {
+            $kelurahan = $model->detail($kelurahan_id, 'kelurahan');
+            $kecamatan = $model->detail($kelurahan->kecamatan_id, 'kecamatan');
+            $kabupaten = $model->detail($kecamatan->kabupaten_id, 'kabupaten');
+            $pModel = new PosyanduModel();
+            $posyandu = $pModel->byKelurahan($kelurahan_id);
 
-        $data = [
-            'title' => 'Data Posyandu',
-            'kelurahan' => $kelurahan,
-            'kecamatan' => $kecamatan,
-            'kabupaten' => $kabupaten,
-            'posyandu' => $posyandu
-        ];
+            $data = [
+                'title' => 'Data Posyandu',
+                'kelurahan' => $kelurahan,
+                'kecamatan' => $kecamatan,
+                'kabupaten' => $kabupaten,
+                'posyandu' => $posyandu
+            ];
+        } else {
+            $admin = admin();
+            $kelurahan = $model->detail($admin->kelurahan_id, 'kelurahan');
+            // $kecamatan = $model->detail($kelurahan->kecamatan_id, 'kecamatan');
+            // $kabupaten = $model->detail($kecamatan->kabupaten_id, 'kabupaten');
+            $pModel = new PosyanduModel();
+            $posyandu = $pModel->byKelurahan($admin->kelurahan_id);
+            $data = [
+                'title' => 'Data Posyandu',
+                'kelurahan' => $kelurahan,
+                'posyandu' => $posyandu
+            ];
+        }
         return view('master_posyandu', $data);
     }
     function saveposyandu()
@@ -189,6 +222,8 @@ class Master extends BaseController
         $id = $this->request->getPost('posyandu_id');
         if ($id == null)
             $data['kelurahan_id'] = $this->request->getPost('kelurahan_id');
+        if (user()->user_type == 'admin')
+            $data['kelurahan_id'] = admin()->kelurahan_id;
         $model = new MasterModel();
         if (!$model->saveData('posyandu', $id, $data))
             return redirect()->back()->with('danger', 'Data tidak dapat disimpan! Terjadi kesalahan')->with('errors', $model->errors());

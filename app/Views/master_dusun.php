@@ -6,7 +6,9 @@
         <div class="widget">
             <header class="widget-header">
                 <h4 class="widget-title"><?= $title ?></h4>
-                <h5></a><?= $kabupaten->kabupaten_nama ?>/<a href="<?= base_url('superadmin/kecamatan/' . $kabupaten->kabupaten_id) ?>" class="text-primary"><?= $kecamatan->kecamatan_nama ?>/<a href="<?= base_url('superadmin/kelurahan/' . $kecamatan->kecamatan_id) ?>" class="text-primary"><?= $kelurahan->kelurahan_nama ?></a></h5>
+                <?php if (user()->user_type == 'superadmin') : ?>
+                    <h5></a><?= $kabupaten->kabupaten_nama ?>/<a href="<?= base_url('superadmin/kecamatan/' . $kabupaten->kabupaten_id) ?>" class="text-primary"><?= $kecamatan->kecamatan_nama ?>/<a href="<?= base_url('superadmin/kelurahan/' . $kecamatan->kecamatan_id) ?>" class="text-primary"><?= $kelurahan->kelurahan_nama ?></a></h5>
+                <?php endif ?>
 
             </header><!-- .widget-header -->
             <hr class="widget-separator">
@@ -41,7 +43,7 @@
                                             <td><?= $p->dusun_nama ?></td>
                                             <td><?= $p->posyandu_nama ?></td>
                                             <td>
-                                                <form action="<?= base_url('superadmin/dusun/hapus') ?>" method="post">
+                                                <form action="<?= base_url(session('user')->user_type . '/dusun/hapus') ?>" method="post">
                                                     <input type="hidden" name="dusun_id" value="<?= $p->dusun_id ?>">
                                                     <a href="#" class="badge bg-warning" data-id="<?= $p->dusun_id ?>" data-nama="<?= $p->dusun_nama ?>" data-posyandu="<?= $p->posyandu_id ?>" data-toggle="modal" data-target="#edit">Edit</a>
                                                     <button type="submit" class="badge bg-danger border-0">Hapus</button>
@@ -60,7 +62,7 @@
     </div><!-- END column -->
 </div><!-- .row -->
 <!-- /.container-fluid -->
-<form action="<?= base_url('superadmin/dusun/tambah') ?>" method="post" enctype="multipart/form-data" autocomplete="off">
+<form action="<?= base_url(session('user')->user_type . '/dusun/tambah') ?>" method="post" enctype="multipart/form-data" autocomplete="off">
     <div id="tambah" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -106,7 +108,7 @@
         </div><!-- /.modal-dialog -->
     </div>
 </form>
-<form action="<?= base_url('superadmin/dusun/update') ?>" method="post" enctype="multipart/form-data" autocomplete="off">
+<form action="<?= base_url(session('user')->user_type . '/dusun/update') ?>" method="post" enctype="multipart/form-data" autocomplete="off">
     <div id="edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

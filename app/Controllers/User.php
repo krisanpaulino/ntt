@@ -49,10 +49,14 @@ class User extends BaseController
     {
         $model = new PetugasModel();
         $pmodel = new PosyanduModel();
+        if (user()->user_type == 'admin')
+            $posyandu = $pmodel->byKelurahan(admin()->kelurahan_id);
+        else
+            $posyandu = $pmodel->findAll();
         $data = [
-            'title' => 'Data Petugas',
+            'title' => 'Data Petugas Posyandu',
             'petugas' => $model->findPetugas(),
-            'posyandu' => $pmodel->findAll()
+            'posyandu' => $posyandu
         ];
         return view('user_petugas', $data);
     }
@@ -105,10 +109,14 @@ class User extends BaseController
         $model = new PetugasModel();
         $petugas = $model->findPetugas($petugas_id);
         $model = new PosyanduModel();
+        if (user()->user_type == 'admin')
+            $posyandu = $model->byKelurahan(admin()->kelurahan_id);
+        else
+            $posyandu = $model->findAll();
         $data = [
             'title' => 'Detail Petugas',
             'petugas' => $petugas,
-            'posyandu' => $model->findAll()
+            'posyandu' => $posyandu
         ];
 
         return view('pengguna/petugas-detail', $data);
@@ -137,13 +145,17 @@ class User extends BaseController
         $model->delete($user_id);
         return redirect()->to('admin/petugas');
     }
-    public function petugasdesa()
+    public function petugasdesa($kelurahan_id = null)
     {
         $model = new PetugasdesaModel();
         $pmodel = new MasterModel();
+        if (user()->user_type == 'admin')
+            $petugasdesa = $model->findByDesa(admin()->kelurahan_id);
+        else
+            $petugasdesa = $model->findByDesa($kelurahan_id);
         $data = [
-            'title' => 'Data Petugas',
-            'petugasdesa' => $model->findPetugas(),
+            'title' => 'Data Petugas Desa',
+            'petugasdesa' => $petugasdesa,
             'kelurahan' => $pmodel->getKelurahan()
         ];
         return view('user_petugasdesa', $data);
@@ -151,8 +163,6 @@ class User extends BaseController
 
     public function storePetugasdesa()
     {
-
-
         $user =  [
             'user_email' => $this->request->getPost('user_email'),
             'user_password' => $this->request->getPost('user_password'),
@@ -178,6 +188,8 @@ class User extends BaseController
                 'kelurahan_id' => $this->request->getPost('kelurahan_id'),
                 'user_id' => $user_id
             ];
+            if (user()->user_type == 'admin')
+                $data['kelurahan_id'] = admin()->kelurahan_id;
 
             $pmodel = new PetugasdesaModel();
             $data['petugas_foto'] = 'default.jpg';

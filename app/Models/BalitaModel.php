@@ -93,15 +93,18 @@ class BalitaModel extends Model
     {
         $this->where("NOT EXISTS (SELECT * FROM hasilukur WHERE periode_id = '$periode_id' AND hasilukur.balita_id = balita.balita_id)", null, false);
         $this->where('balita_umur <=', 59, true);
-        if ($posyandu_id != null)
-            $this->where('balita.posyandu_id', $posyandu_id);
+        $this->join('dusun', 'dusun.dusun_id = balita.dusun_id');
+        if ($posyandu_id != null) {
+            $this->where('dusun.posyandu_id', $posyandu_id);
+        }
         return $this->find();
     }
     public function sudahPeriksa($periode_id, $posyandu_id = null)
     {
         $this->where("EXISTS (SELECT * FROM hasilukur WHERE periode_id = '$periode_id' AND hasilukur.balita_id = balita.balita_id)", null, false);
+        $this->join('dusun', 'dusun.dusun_id = balita.dusun_id');
         if ($posyandu_id != null)
-            $this->where('balita.posyandu_id', $posyandu_id);
+            $this->where('dusun.posyandu_id', $posyandu_id);
         return $this->find();
     }
 
@@ -114,9 +117,10 @@ class BalitaModel extends Model
     function findJumlahBalita($posyandu_id = null)
     {
         $this->selectCount('balita_id', 'jumlah');
+        $this->join('dusun', 'dusun.dusun_id = balita.dusun_id');
         $this->where('balita_umur <= ', 59, true);
         if ($posyandu_id != null)
-            $this->where('posyandu_id', $posyandu_id);
+            $this->where('dusun.posyandu_id', $posyandu_id);
         return $this->first();
     }
     function findCetak($periode_id, $posyandu_id = null)

@@ -84,7 +84,9 @@ class PetugasdesaModel extends Model
 
     public function findByDesa($kelurahan_id)
     {
-        $this->where('kelurahan_id', $kelurahan_id);
+        $this->join('user', 'user.user_id = petugasdesa.user_id');
+        $this->join('kelurahan', 'kelurahan.kelurahan_id = petugasdesa.kelurahan_id');
+        $this->where('petugasdesa.kelurahan_id', $kelurahan_id);
         return $this->find();
     }
 }

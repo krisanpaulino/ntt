@@ -79,16 +79,16 @@ class Home extends BaseController
         }
 
         $model = new BalitaModel();
-        $jumlah_balita = $model->findJumlahBalita(session('petugas')->posyandu_id);
+        $jumlah_balita = $model->findJumlahBalita(petugas()->posyandu_id);
         $model = new HasilukurModel();
-        $status_gizi = $model->findJumlah($periode->periode_id, session('petugas')->posyandu_id);
+        // $status_gizi = $model->findJumlah($periode->periode_id, session('petugas')->posyandu_id);
         // dd($status_gizi);
         $data['jumlah_balita'] = $jumlah_balita;
         $data['periode'] = $periode;
-        $data['status_gizi'] = $status_gizi;
+        // $data['status_gizi'] = $status_gizi;
         $data['title'] = 'Dashboard';
 
-        return view('dashboards/petugas', $data);
+        return view('dashboard_petugas', $data);
     }
 
     public function orangtua()

@@ -18,7 +18,7 @@ class PeriodeModel extends Model
         'periode_bulan',
         'periode_tahun',
         'periode_status',
-        'posyandu_id',
+        'kelurahan_id',
     ];
 
     // Dates
@@ -33,7 +33,7 @@ class PeriodeModel extends Model
         'periode_bulan' => 'required',
         'periode_tahun' => 'required',
         'periode_status' => 'required',
-        'posyandu_id' => 'required',
+        'kelurahan_id' => 'required',
     ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\AdminModel;
 use App\Models\AmbangbatasModel;
 use App\Models\PetugasdesaModel;
 use App\Models\PetugasModel;
@@ -10,6 +11,12 @@ function petugas()
 {
     $model = new PetugasModel();
     $petugas = $model->findPetugas(session('petugas')->petugas_id);
+    return $petugas;
+}
+function admin()
+{
+    $model = new AdminModel();
+    $petugas = $model->findUserAdmin(session('user')->user_id);
     return $petugas;
 }
 function petugasdesa()

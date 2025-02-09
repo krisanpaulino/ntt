@@ -39,7 +39,7 @@
                                             <td><?= $p->petugasdesa_jk ?></td>
                                             <td><?= $p->kelurahan_nama ?></td>
                                             <td>
-                                                <form action="<?= base_url('admin/petugasdesa/hapus') ?>" method="post">
+                                                <form action="<?= base_url(session('user')->user_type . '/petugasdesa/hapus') ?>" method="post">
                                                     <input type="hidden" name="user_id" value="<?= $p->user_id ?>">
                                                     <a href="<?= base_url('admin/petugasdesa/' . $p->petugasdesa_id) ?>" class="badge bg-primary">Detail</a>
                                                     <button type="submit" class="badge bg-danger border-0">Hapus</button>
@@ -58,7 +58,7 @@
     </div><!-- END column -->
 </div><!-- .row -->
 <!-- /.container-fluid -->
-<form action="<?= base_url('admin/petugas-desa/tambah') ?>" method="post" enctype="multipart/form-data" autocomplete="off">
+<form action="<?= base_url(session('user')->user_type . '/petugas-desa/tambah') ?>" method="post" enctype="multipart/form-data" autocomplete="off">
     <div id="tambah" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -69,20 +69,22 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group mb-4">
-                        <label for="kelurahan_id">Desa/Kelurahan</label>
-                        <select class="form-control <?= (isset(session('errors')['kelurahan_id'])) ? 'is-invalid' : '' ?>" id="kelurahan_id" name="kelurahan_id" required>
-                            <option value="">Pilih Desa</option>
-                            <?php foreach ($kelurahan as $p) : ?>
-                                <option value="<?= $p->kelurahan_id ?>" <?= ($p->kelurahan_id == old('kelurahan_id')) ? 'selected' : '' ?>><?= $p->kelurahan_nama ?></option>
-                            <?php endforeach ?>
-                        </select>
-                        <div class="invalid-feedback">
-                            <?php if (isset(session('errors')['kelurahan_id'])) : ?>
-                                <?= session('errors')['kelurahan_id'] ?>
-                            <?php endif; ?>
+                    <?php if (session('user')->user_type == 'superadmin') : ?>
+                        <div class="form-group mb-4">
+                            <label for="kelurahan_id">Desa/Kelurahan</label>
+                            <select class="form-control <?= (isset(session('errors')['kelurahan_id'])) ? 'is-invalid' : '' ?>" id="kelurahan_id" name="kelurahan_id" required>
+                                <option value="">Pilih Desa</option>
+                                <?php foreach ($kelurahan as $p) : ?>
+                                    <option value="<?= $p->kelurahan_id ?>" <?= ($p->kelurahan_id == old('kelurahan_id')) ? 'selected' : '' ?>><?= $p->kelurahan_nama ?></option>
+                                <?php endforeach ?>
+                            </select>
+                            <div class="invalid-feedback">
+                                <?php if (isset(session('errors')['kelurahan_id'])) : ?>
+                                    <?= session('errors')['kelurahan_id'] ?>
+                                <?php endif; ?>
+                            </div>
                         </div>
-                    </div>
+                    <?php endif ?>
                     <div class="form-group mb-4">
                         <label for="petugasdesa_nama">Nama Petugas</label>
                         <input type="text" onkeydown="return /[a-z, ]/i.test(event.key)" class="form-control <?= (isset(session('errors')['petugasdesa_nama'])) ? 'is-invalid' : '' ?>" id="petugasdesa_nama" name="petugasdesa_nama" value="<?= old('petugasdesa_nama') ?>" required>

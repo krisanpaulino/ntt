@@ -60,18 +60,13 @@ class ApiTimbang extends BaseController
     function timbang()
     {
         $data = $this->request->getVar();
-        // $data = (array)$data;
-        //Dapatkan Data Balita
+
         $model = new BalitaModel();
-        $balita = $model->find($data['balita_id']);
-
-        //Hitung umur timbang balita
-        // $tgllahir = new DateTime($balita['balita_tgllahir']);
-        // $now = new DateTime($data['hasilukur_tgl']);
-        // $diff = $now->diff($tgllahir);
-
-        // $data['hasilukur_umur'] = ($diff->y * 12) + $diff->m;
-        // $data['hasilukur_tgl'] = date('Y-m-d');
+        $balita = $model->find($this->request->getPost('balita_id'));
+        //Dapatkan Hasil Ukur dari Form
+        // $data = $this->request->getPost();
+        // $data['periode_id'] = $periode->periode_id;
+        $data['hasilukur_umur'] = $balita->balita_umur;
         $model = new HasilukurModel();
         if ($hasilukur_id = $model->insert($data, true)) {
             $response = [
