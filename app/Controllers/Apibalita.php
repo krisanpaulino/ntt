@@ -86,13 +86,13 @@ class Apibalita extends BaseController
     }
     function update($id)
     {
-        $data = (array)$this->request->getRawInput();
+        $data = (array)$this->request->getVar();
         $data['balita_id'] = $id;
         $exist = $this->model->find($id);
-        // if ($exist == null)
-        //     return $this->failNotFound('Data tidak ditemukan untuk id $id');
-        // if (!$this->model->update($id, $data))
-        //     return $this->fail($data);
+        if ($exist == null)
+            return $this->failNotFound('Data tidak ditemukan untuk id $id');
+        if (!$this->model->update($id, $data))
+            return $this->fail($data);
 
         $response = [
             'status' => 200,
