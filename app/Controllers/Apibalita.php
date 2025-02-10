@@ -86,7 +86,7 @@ class Apibalita extends BaseController
     }
     function update($id)
     {
-        $data = $this->request->getRawInput();
+        $data = (array)$this->request->getRawInput();
         $data['balita_id'] = $id;
         $exist = $this->model->find($id);
         if (!$exist)
