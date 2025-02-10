@@ -20,7 +20,7 @@ class ApiTimbang extends BaseController
         // if (session('user')->role_id == 3)
         //     $this->model->where('rt_id', session('user')->rt_id);
         $model = new PeriodeModel();
-        $data = $model->findUrutan($kelurahan_id);
+        $data = $model->findBuka($kelurahan_id);
         if ($data != null) {
             return $this->respond($data, 200);
         }
