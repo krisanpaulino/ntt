@@ -92,7 +92,7 @@ class Apibalita extends BaseController
         if ($exist == null)
             return $this->failNotFound('Data tidak ditemukan untuk id $id');
         if (!$this->model->update($id, $data))
-            return $this->fail($this->model->errors());
+            return $this->fail($data);
 
         $response = [
             'status' => 200,
