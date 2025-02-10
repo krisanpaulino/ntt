@@ -38,6 +38,15 @@ class ApiTimbang extends BaseController
         }
         return $this->failNotFound('Tidak ada periode');
     }
+    public function detailtimbang($hasilukur_id)
+    {
+        $model = new HasilukurModel();
+        $data = $model->byId($hasilukur_id);
+        if ($data != null) {
+            return $this->respond($data, 200);
+        }
+        return $this->failNotFound('Tidak ada data');
+    }
 
     function createPeriode()
     {
@@ -62,7 +71,7 @@ class ApiTimbang extends BaseController
         $data = $this->request->getVar();
 
         $model = new BalitaModel();
-        $balita = $model->find($this->request->getPost('balita_id'));
+        $balita = $model->find($data['balita_id']);
         //Dapatkan Hasil Ukur dari Form
         // $data = $this->request->getPost();
         // $data['periode_id'] = $periode->periode_id;
@@ -74,6 +83,33 @@ class ApiTimbang extends BaseController
                 'error' => null,
                 'messages' => [
                     'success' => 'Data penimbangan ditambahkan'
+                ],
+                'data' => (array)$data
+            ];
+            return $this->respond($response);
+        } else
+            return $this->fail($model->errors());
+    }
+    function edittimbang($hasilukur_id)
+    {
+        $data = (array)$this->request->getRawInput();
+        if ($data == null) {
+            $data = (array)$this->request->getVar();
+        }
+
+        // $model = new BalitaModel();
+        // $balita = $model->find($balita_id);
+        //Dapatkan Hasil Ukur dari Form
+        // $data = $this->request->getPost();
+        // $data['periode_id'] = $periode->periode_id;
+        // // $data['hasilukur_umur'] = $balita->balita_umur;
+        $model = new HasilukurModel();
+        if ($model->update($hasilukur_id, $data)) {
+            $response = [
+                'status' => 201,
+                'error' => null,
+                'messages' => [
+                    'success' => 'Data penimbangan diubah'
                 ],
                 'data' => (array)$data
             ];

@@ -27,7 +27,9 @@ $routes->put('api/balita/(:num)', 'Apibalita::update/$1');
 $routes->delete('api/balita/(:num)', 'Apibalita::delete/$1');
 
 $routes->get('api/periode/(:num)', 'Apitimbang::periode/$1');
+$routes->get('api/timbang/(:num)', 'Apitimbang::detailtimbang/$1');
 $routes->post('api/timbang', 'Apitimbang::timbang');
+$routes->put('api/timbang/(:num)', 'Apitimbang::edittimbang/$1');
 
 
 $routes->group('superadmin', ['filter' => 'superadmin'], static function ($routes) {
@@ -72,6 +74,10 @@ $routes->group('superadmin', ['filter' => 'superadmin'], static function ($route
     $routes->get('petugasdesa/(:num)', 'User::detailPetugasdesa/$1');
     $routes->post('petugasdesa/update', 'User::updatePetugasdesa');
 
+    $routes->get('balita', 'Balita::index');
+    $routes->get('riwayat-balita/(:num)', 'Periksa::riwayat/$1');
+    $routes->get('periode', 'Periode::index');
+
     // $routes->get('posyandu', 'Posyandu::index');
     // $routes->post('posyandu/tambah', 'Posyandu::store');
     // $routes->post('posyandu/hapus', 'Posyandu::hapus');
@@ -83,6 +89,9 @@ $routes->group('admin', ['filter' => 'admin'], static function ($routes) {
     $routes->post('admin/tambah', 'User::storeAdmin');
     $routes->post('user/hapus', 'User::deleteAdmin');
     $routes->post('petugas/hapus', 'User::deletePetugas');
+
+    $routes->get('balita', 'Balita::index');
+    $routes->get('riwayat-balita/(:num)', 'Periksa::riwayat/$1');
 
     $routes->get('petugas', 'User::petugas');
     $routes->post('petugas/tambah', 'User::storePetugas');
@@ -121,7 +130,8 @@ $routes->group('admin', ['filter' => 'admin'], static function ($routes) {
 
 $routes->group('petugas', ['filter' => 'petugas'], static function ($routes) {
     $routes->get('/', 'Home::petugas');
-    // $routes->get('balita', 'Balita::index');
+    $routes->get('balita', 'Balita::index');
+    $routes->get('riwayat-balita/(:num)', 'Periksa::riwayat/$1');
     // $routes->get('balita/(:num)', 'Balita::detail/$1');
     // $routes->post('balita/tambah', 'Balita::store');
     // $routes->post('balita/update', 'Balita::update');
@@ -137,6 +147,10 @@ $routes->group('petugas', ['filter' => 'petugas'], static function ($routes) {
     $routes->get('profil', 'Profil::petugas');
     $routes->post('update-profil', 'Profil::updatePetugas');
     $routes->post('update-login', 'Profil::updateUser');
+
+    $routes->get('riwayat', 'Periksa::riwayatPeriode');
+    $routes->get('riwayat/(:num)', 'Periksa::riwayatDetail/$1');
+    $routes->get('detail-ukur/(:num)/(:num)', 'Periksa::detail/$1/$2');
 
     $routes->get('cetak-hasil/(:num)/(:num)', 'Antropometri::cetakHasilPdf/$1/$2');
     $routes->get('laporan-hasil/(:num)/(:num)', 'Antropometri::laporanHasil/$1/$2');
