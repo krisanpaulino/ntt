@@ -104,15 +104,6 @@ class ApiTimbang extends BaseController
         // $data = $this->request->getPost();
         // $data['periode_id'] = $periode->periode_id;
         // // $data['hasilukur_umur'] = $balita->balita_umur;
-        $response = [
-            'status' => 201,
-            'error' => null,
-            'messages' => [
-                'success' => 'Data penimbangan diubah'
-            ],
-            'data' => (array)$data
-        ];
-        return $this->respond($response);
         $model = new HasilukurModel();
         if ($model->update($hasilukur_id, $data)) {
             $response = [
