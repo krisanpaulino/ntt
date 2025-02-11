@@ -69,6 +69,7 @@ class ApiTimbang extends BaseController
     function timbang()
     {
         $data = $this->request->getVar();
+        // if($data == null)
 
         $model = new BalitaModel();
         $balita = $model->find($data['balita_id']);
@@ -92,7 +93,7 @@ class ApiTimbang extends BaseController
     }
     function edittimbang($hasilukur_id)
     {
-        $data = (array)$this->request->getRawInput();
+        $data = (array)$this->request->getVar();
         if ($data == null) {
             $data = (array)$this->request->getVar();
         }
