@@ -25,6 +25,11 @@
     <script>
         Breakpoints();
     </script>
+    <style>
+        .badge {
+            border: none;
+        }
+    </style>
 </head>
 
 <body class="menubar-left menubar-unfold menubar-light theme-primary">
@@ -70,7 +75,7 @@
                 </div>
                 <div class="media-body">
                     <div class="foldable">
-                        <h5><a href="javascript:void(0)" class="username"><?= user()->user_email ?></a></a></h5>
+                        <h5><a href="javascript:void(0)" class="username"><?= admin()->kelurahan_nama ?></a></a></h5>
                         <ul>
                             <li class="dropdown">
                                 <a href="javascript:void(0)" class="dropdown-toggle usertitle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -103,70 +108,55 @@
             <div class="menubar-scroll-inner">
                 <ul class="app-menu">
                     <li>
-                        <a href="<?= base_url('dashboard') ?>">
+                        <a href="<?= base_url('admin') ?>">
                             <i class="menu-icon zmdi zmdi-view-dashboard zmdi-hc-lg"></i>
                             <span class="menu-text">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="<?= base_url('admin/user') ?>">
+                        <a href="<?= base_url('admin/periode') ?>">
+                            <i class="menu-icon fa fa-clock-o"></i>
+                            <span class="menu-text">Periode Ukur</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url('admin/posyandu') ?>">
+                            <i class="menu-icon fa fa-institution "></i>
+                            <span class="menu-text">Posyandu</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url('admin/dusun') ?>">
+                            <i class="menu-icon fa fa-institution "></i>
+                            <span class="menu-text">Dusun</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url('admin/balita') ?>">
+                            <i class="menu-icon fa fa-users"></i>
+                            <span class="menu-text">Balita</span>
+                        </a>
+                    </li>
+                    <li class="menu-separator">
+                        <a class="text-muted">
+                            <small><strong class="text-muted">USER</strong></small>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url('admin/petugas') ?>">
                             <i class="menu-icon fa fa-user"></i>
-                            <span class="menu-text">User</span>
+                            <span class="menu-text">Petugas Posyandu</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="<?= base_url('admin/petugas-desa') ?>">
+                            <i class="menu-icon fa fa-user"></i>
+                            <span class="menu-text">Petugas Desa/Kel.</span>
+                        </a>
+                    </li>
+
                     <li class="menu-separator">
                         <hr>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('admin/master/unit') ?>">
-                            <i class="menu-icon fa fa-server"></i>
-                            <span class="menu-text">Master Unit</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('admin/master/jenis') ?>">
-                            <i class="menu-icon fa fa-server"></i>
-                            <span class="menu-text">Master Jenis Arsip</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('admin/arsip') ?>">
-                            <i class="menu-icon fa fa-Example fa-folder-open"></i>
-                            <span class="menu-text">Arsip</span>
-                        </a>
-                    </li>
-                    <li class="has-submenu">
-                        <a href="javascript:void(0)" class="submenu-toggle">
-                            <i class="menu-icon fa fa-Example fa-folder-open"></i>
-                            <span class="menu-text">Perizinan Arsip</span>
-                            <span class="label label-danger menu-label" id="notif1"></span>
-                            <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
-                        </a>
-                        <ul class="submenu">
-                            <li><a href="<?= base_url('admin/pinjam/request') ?>"><span class="menu-text">Request Izin Arsip</span><span class="label label-danger menu-label" id="notif2"></span></a></li>
-                            <li><a href="<?= base_url('admin/pinjam/riwayat') ?>"><span class="menu-text">Riwayat Izin Arsip</span></a></li>
-                        </ul>
-                    </li>
-                    <li class="has-submenu">
-                        <a href="javascript:void(0)" class="submenu-toggle">
-                            <i class="menu-icon glyphicon glyphicon-filter"></i>
-                            <span class="menu-text">Laporan Arsip</span>
-                            <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
-                        </a>
-                        <ul class="submenu">
-                            <li><a href="<?= base_url('admin/laporan/harian') ?>"><span class="menu-text">Harian</span></a></li>
-                            <li><a href="<?= base_url('admin/laporan/bulanan') ?>"><span class="menu-text">Bulanan</span></a></li>
-                            <li><a href="<?= base_url('admin/laporan/tahunan') ?>"><span class="menu-text">Tahunan</span></a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-separator">
-                        <hr>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('admin/informasi') ?>">
-                            <i class="menu-icon fa fa-Example fa-newspaper-o"></i>
-                            <span class="menu-text">Informasi</span>
-                        </a>
                     </li>
                 </ul><!-- .app-menu -->
             </div><!-- .menubar-scroll-inner -->

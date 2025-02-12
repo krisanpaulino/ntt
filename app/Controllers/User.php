@@ -152,7 +152,7 @@ class User extends BaseController
         if (user()->user_type == 'admin')
             $petugasdesa = $model->findByDesa(admin()->kelurahan_id);
         else
-            $petugasdesa = $model->findByDesa($kelurahan_id);
+            $petugasdesa = $model->findPetugas();
         $data = [
             'title' => 'Data Petugas Desa',
             'petugasdesa' => $petugasdesa,

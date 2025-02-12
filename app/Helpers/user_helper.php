@@ -10,7 +10,7 @@ use App\Models\UserModel;
 function petugas()
 {
     $model = new PetugasModel();
-    $petugas = $model->findPetugas(session('petugas')->petugas_id);
+    $petugas = $model->findUserPetugas(session('user')->user_id);
     return $petugas;
 }
 function admin()

@@ -15,13 +15,6 @@
                     </small> -->
 
                     <div class="col-md-12">
-                        <?php if (user()->user_type != 'superadmin') : ?>
-                            <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary mb-4 waves-effect waves-light" data-toggle="modal" data-target="#tambah">Tambah</button>
-                            </div>
-
-                            <br><br>
-                        <?php endif; ?>
                         <div class="table-responsive mt-2">
                             <table id="default-datatable" data-plugin="DataTable" class="table table-striped" cellspacing="0" width="100%">
                                 <thead>
@@ -45,13 +38,7 @@
                                             <td><?= $b->balita_orangtua ?></td>
                                             <td><?= $b->balita_umur ?></td>
                                             <td>
-                                                <a href="<?= base_url(session('user')->user_type . '/riwayat-balita/' . $b->balita_id) ?>" class="badge bg-info">Riwayat ukur</a>
-                                                <?php if (user()->user_type == 'petugasdesa') : ?>
-                                                    <form action="<?= base_url(session('user')->user_type . '/balita/hapus') ?>" method="post">
-                                                        <input type="hidden" name="balita_id" value="<?= $b->balita_id ?>">
-                                                        <button type="submit" class="badge bg-danger border" onclick="return confirm('Apakah anda yakin?')">Hapus</button>
-                                                    </form>
-                                                <?php endif ?>
+                                                <a href="<?= base_url(session('user')->user_type . '/detail-ukur/' . $b->balita_id . '/' . $periode->periode_id) ?>" class="badge bg-info">Detail ukur</a>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>
@@ -136,7 +123,7 @@
                             <?php endif; ?>
                         </div>
                     </div>
-                    <?php if (session('user')->user_type == "petugasdesa" || session('user')->user_type == "admin" || session('user')->user_type == "petugas") : ?>
+                    <?php if (session('user')->user_type == "petugasdesa" || session('user')->user_type == "admin") : ?>
                         <div class="form-group mb-4">
                             <label for="dusun_id">Dusun</label>
                             <select class="form-control <?= (isset(session('errors')['dusun_id'])) ? 'is-invalid' : '' ?>" id="dusun_id" name="dusun_id" required>

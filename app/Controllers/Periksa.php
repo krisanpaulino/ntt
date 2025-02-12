@@ -78,7 +78,54 @@ class Periksa extends BaseController
             ->withInput()
             ->with('errors', $model->errors());
     }
+    public function riwayat($balita_id)
+    {
+        $model = new BalitaModel();
+        $balita = $model->findBalita($balita_id);
 
+        $model = new HasilukurModel();
+        $hasilukur = $model->byBalita($balita_id);
+
+        $data = [
+            'title' => 'Daftar Hasil Ukur',
+            'hasilukur' => $hasilukur,
+            'balita' => $balita
+        ];
+
+        return view('periksa_riwayat', $data);
+    }
+    function riwayatPeriode()
+    {
+        $model = new PeriodeModel();
+        if (user()->user_type == 'admin')
+            $periode = $model->findUrutan(admin()->kelurahan_id);
+        elseif (user()->user_type == 'petugas')
+            $periode = $model->findUrutan(petugas()->kelurahan_id);
+        else
+            $periode = $model->findUrutan();
+        $bulan = bulan();
+        $data = [
+            'title' => 'Periode',
+            'periode' => $periode,
+            'bulan' => $bulan
+        ];
+        return view('riwayat_periode', $data);
+    }
+    function riwayatDetail($periode_id)
+    {
+        $model = new PeriodeModel();
+        $periode = $model->find($periode_id);
+        $model = new BalitaModel();
+        $posyandu_id = petugas()->posyandu_id;
+
+        $sudah_periksa = $model->sudahPeriksa($periode->periode_id, $posyandu_id);
+        $data = [
+            'title' => 'Pemeriksaan Periode ' . konversiBulan($periode->periode_bulan) . ' ' . $periode->periode_tahun,
+            'balita' => $sudah_periksa,
+            'periode' => $periode
+        ];
+        return view('riwayat_detail', $data);
+    }
     public function detail($balita_id, $periode_id = null)
     {
         $model = new PeriodeModel();

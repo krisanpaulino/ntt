@@ -15,16 +15,27 @@ class Balita extends BaseController
 {
     public function index()
     {
-        $petugas = petugasdesa();
         $model = new BalitaModel();
         if (session('user')->user_type == 'petugasdesa') {
+            $petugas = petugasdesa();
             $balita = $model->findBalita(null, $petugas->kelurahan_id);
             $model = new MasterModel();
             $dusun = $model->getDusun($petugas->kelurahan_id);
             $data['dusun'] = $dusun;
+        } elseif (session('user')->user_type == 'superadmin')
+            $balita = $model->findBalita();
+        elseif (session('user')->user_type == 'admin') {
+            $balita = $model->findBalita(null, admin()->kelurahan_id);
+            $model = new MasterModel();
+            $dusun = $model->getDusun(admin()->kelurahan_id);
+            $data['dusun'] = $dusun;
         } else {
             $balita = $model->byPosyandu(session('petugas')->posyandu_id);
+            $model = new MasterModel();
+            $dusun = $model->getDusunByPosyandu(petugas()->posyandu_id);
+            $data['dusun'] = $dusun;
         }
+
         $data['title'] = 'Data Balita';
         $data['balita'] = $balita;
         $model = new PeriodeModel();

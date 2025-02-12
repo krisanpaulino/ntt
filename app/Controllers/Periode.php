@@ -11,7 +11,10 @@ class Periode extends BaseController
     public function index()
     {
         $model = new PeriodeModel();
-        $periode = $model->findUrutan(admin()->kelurahan_id);
+        if (user()->user_type != 'superadmin')
+            $periode = $model->findUrutan(admin()->kelurahan_id);
+        else
+            $periode = $model->findUrutan();
         $bulan = bulan();
         $data = [
             'title' => 'Periode',

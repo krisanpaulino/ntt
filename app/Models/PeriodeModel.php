@@ -53,15 +53,20 @@ class PeriodeModel extends Model
     public function findBuka($kelurahan_id = null)
     {
         if ($kelurahan_id != null)
-            $this->where('kelurahan_id', $kelurahan_id);
+            $this->where('periode.kelurahan_id', $kelurahan_id);
         $this->where('periode_status', 'buka');
         return $this->first();
     }
     public function findUrutan($kelurahan_id = null)
     {
         if ($kelurahan_id != null)
-            $this->where('kelurahan_id', $kelurahan_id);
+            $this->where('periode.kelurahan_id', $kelurahan_id);
         $this->orderBy('periode_id', 'desc');
+        $this->join('kelurahan', 'kelurahan.kelurahan_id = periode.kelurahan_id');
+        if (user()->user_type == 'superadmin') {
+            $this->join('kecamatan', 'kecamatan.kecamatan_id = kelurahan.kecamatan_id');
+            $this->join('kabupaten', 'kabupaten.kabupaten_id = kecamatan.kabupaten_id');
+        }
         return $this->find();
     }
 }

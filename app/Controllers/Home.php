@@ -56,7 +56,7 @@ class Home extends BaseController
         }
 
         $model = new BalitaModel();
-        $jumlah_balita = $model->findJumlahBalita();
+        $jumlah_balita = $model->findByKelurahan(admin()->keluarahan_id);
         $model = new HasilukurModel();
         // $status_gizi = $model->findJumlah($periode->periode_id);
         $data['jumlah_balita'] = $jumlah_balita;
@@ -80,6 +80,30 @@ class Home extends BaseController
 
         $model = new BalitaModel();
         $jumlah_balita = $model->findJumlahBalita(petugas()->posyandu_id);
+        $model = new HasilukurModel();
+        // $status_gizi = $model->findJumlah($periode->periode_id, session('petugas')->posyandu_id);
+        // dd($status_gizi);
+        $data['jumlah_balita'] = $jumlah_balita;
+        $data['periode'] = $periode;
+        // $data['status_gizi'] = $status_gizi;
+        $data['title'] = 'Dashboard';
+
+        return view('dashboard_petugas', $data);
+    }
+    public function petugasdesa()
+    {
+        helper('user');
+
+        $model = new PeriodeModel();
+        $periode = $model->findBuka();
+        if (empty($periode)) {
+            $model->where('periode_status', 'selesai');
+            $model->orderBy('periode_id', 'desc');
+            $periode = $model->first();
+        }
+
+        $model = new BalitaModel();
+        $jumlah_balita = $model->findByKelurahan(petugasdesa()->kelurahan_id);
         $model = new HasilukurModel();
         // $status_gizi = $model->findJumlah($periode->periode_id, session('petugas')->posyandu_id);
         // dd($status_gizi);

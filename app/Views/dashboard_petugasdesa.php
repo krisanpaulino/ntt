@@ -32,18 +32,7 @@
                         <h3 class="widget-title text-primary"><span class="counter" data-plugin="counterUp"><?= $jumlah_balita->jumlah ?></span></h3>
                         <small class="text-color">Jumlah Balita</small>
                     </div>
-                    <span class="pull-right big-icon watermark"><i class="fa fa-users"></i></span>
-                </div>
-            </div><!-- .widget -->
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="widget stats-widget">
-                <div class="widget-body clearfix">
-                    <div class="pull-left">
-                        <h3 class="widget-title text-warning"><span class="counter"><?= ($periode != null) ? konversiBulan($periode->periode_bulan) . ' ' . $periode->periode_tahun : '-' ?></span></h3>
-                        <small class="text-color">Periode Aktif</small>
-                    </div>
-                    <span class="pull-right big-icon watermark"><i class="fa fa-clock-o"></i></span>
+                    <span class="pull-right big-icon watermark"><i class="fa fa-paperclip"></i></span>
                 </div>
             </div><!-- .widget -->
         </div>

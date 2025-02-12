@@ -150,15 +150,6 @@
 
 
 
-                    <div class="form-group mb-4">
-                        <label for="file">Foto Petugas</label>
-                        <input type="file" class="form-control <?= (isset(session('errors')['file'])) ? 'is-invalid' : '' ?>" id="file" name="file" value="<?= old('file') ?>">
-                        <div class="invalid-feedback">
-                            <?php if (isset(session('errors')['file'])) : ?>
-                                <?= session('errors')['file'] ?>
-                            <?php endif; ?>
-                        </div>
-                    </div>
 
                     <h3>Informasi Login</h3>
                     <hr>

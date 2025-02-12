@@ -103,6 +103,7 @@ class BalitaModel extends Model
     {
         $this->where("EXISTS (SELECT * FROM hasilukur WHERE periode_id = '$periode_id' AND hasilukur.balita_id = balita.balita_id)", null, false);
         $this->join('dusun', 'dusun.dusun_id = balita.dusun_id');
+        $this->join('kelurahan', 'kelurahan.kelurahan_id = dusun.kelurahan_id');
         if ($posyandu_id != null)
             $this->where('dusun.posyandu_id', $posyandu_id);
         return $this->find();
@@ -121,6 +122,15 @@ class BalitaModel extends Model
         $this->where('balita_umur <= ', 59, true);
         if ($posyandu_id != null)
             $this->where('dusun.posyandu_id', $posyandu_id);
+        return $this->first();
+    }
+    function findByKelurahan($kelurahan_id = null)
+    {
+        $this->selectCount('balita_id', 'jumlah');
+        $this->join('dusun', 'dusun.dusun_id = balita.dusun_id');
+        $this->where('balita_umur <= ', 59, true);
+        if ($kelurahan_id != null)
+            $this->where('dusun.kelurahan_id', $kelurahan_id);
         return $this->first();
     }
     function findCetak($periode_id, $posyandu_id = null)

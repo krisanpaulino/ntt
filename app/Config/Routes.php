@@ -166,29 +166,4 @@ $routes->group('petugasdesa', ['filter' => 'petugasdesa'], static function ($rou
     $routes->post('balita/hapus', 'Balita::delete');
     $routes->post('balita/buat-akun', 'Balita::buatAkun');
     $routes->post('laporan-balita', 'Balita::laporanBalita');
-
-    $routes->get('periksa', 'Periksa::index');
-    $routes->get('periksa/(:num)', 'Periksa::periksa/$1');
-    $routes->get('periksa/detail/(:num)', 'Periksa::detail/$1');
-    $routes->post('periksa/store', 'Periksa::store');
-
-    $routes->get('hasilukur', 'Antropometri::index');
-    $routes->post('antropometri/hitung', 'Antropometri::hitung');
-    $routes->get('hasilukur/(:num)', 'Antropometri::detailPetugas/$1');
-
-    $routes->get('profil', 'Profil::petugas');
-    $routes->post('update-profil', 'Profil::updatePetugas');
-    $routes->post('update-login', 'Profil::updateUser');
-
-    $routes->get('cetak-hasil/(:num)/(:num)', 'Antropometri::cetakHasilPdf/$1/$2');
-    $routes->get('laporan-hasil/(:num)/(:num)', 'Antropometri::laporanHasil/$1/$2');
-
-    $routes->get('hasilukur/(:num)/detail/(:num)', 'Antropometri::detailUkur/$1/$2');
-
-    $routes->get('pengumuman', 'Pengumuman::index');
-    $routes->get('pengumuman/tambah', 'Pengumuman::tambah');
-    $routes->get('pengumuman/(:num)', 'Pengumuman::edit/$1');
-    $routes->post('pengumuman/store', 'Pengumuman::store');
-    $routes->post('pengumuman/update', 'Pengumuman::update');
-    $routes->post('pengumuman/hapus', 'Pengumuman::delete');
 });

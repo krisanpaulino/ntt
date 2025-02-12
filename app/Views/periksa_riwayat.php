@@ -6,10 +6,10 @@
         <div class="col-sm-6">
             <h2><?= $title ?></h2>
         </div>
-        <!-- <div class="col-sm-6 text-right">
-            <span><a href="<?= base_url('petugas/periksa') ?>" class="text-primary">
+        <div class="col-sm-6 text-right">
+            <span><a href="<?= base_url(user()->user_type . '/balita') ?>" class="text-primary">
                     << Kembali</a></span>
-        </div> -->
+        </div>
     </div>
     <div class="col-md-4">
         <div class="widget">
@@ -41,36 +41,37 @@
     <div class="col-md-6">
         <div class="widget">
             <header class="widget-header">
-                <h4 class="widget-title">Detail Pengukuran</h4>
+                <h4 class="widget-title">Riwayat Pengukuran</h4>
             </header><!-- .widget-header -->
             <div class="widget-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table">
-                            <tr>
-                                <th>Usia Ukur</th>
-                                <td><?= $detail->hasilukur_umur ?></td>
-                            </tr>
-                            <tr>
-                                <th>Tanggal Ukur</th>
-                                <td><?= $detail->hasilukur_tgl ?></td>
-                            </tr>
-                            <tr>
-                                <th>Posisi</th>
-                                <td><?= $detail->hasilukur_posisi ?></td>
-                            </tr>
-                            <tr>
-                                <th>Berat Badan</th>
-                                <td><?= $detail->hasilukur_bb ?> kg</td>
-                            </tr>
-                            <tr>
-                                <th>Tinggi/Panjang Badan</th>
-                                <td><?= $detail->hasilukur_pbtb ?> cm</td>
-                            </tr>
-                            <tr>
-                                <th>Lingkar Kepala</th>
-                                <td><?= $detail->hasilukur_lk ?> cm</td>
-                            </tr>
+                        <table id="default-datatable" data-plugin="DataTable" class="table table-striped" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10%;">No</th>
+                                    <th>Bulan</th>
+                                    <th>Tahun</th>
+                                    <th>Usia Pengukuran (Bln)</th>
+                                    <th>BB</th>
+                                    <th>Tinggi/Panjang Badan</th>
+                                    <th>Lingkar Kepala</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $no = 1; ?>
+                                <?php foreach ($hasilukur as $h) : ?>
+                                    <tr>
+                                        <td><?= $no++ ?></td>
+                                        <td><?= konversiBulan($h->periode_bulan) ?></td>
+                                        <td><?= $h->periode_tahun ?></td>
+                                        <td><?= $h->hasilukur_umur ?></td>
+                                        <td><?= $h->hasilukur_bb ?> Kg</td>
+                                        <td><?= $h->hasilukur_pbtb ?> Cm</td>
+                                        <td><?= $h->hasilukur_lk ?> Cm</td>
+                                    </tr>
+                                <?php endforeach ?>
+                            </tbody>
                         </table>
                     </div>
                 </div>

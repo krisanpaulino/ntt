@@ -25,6 +25,11 @@
     <script>
         Breakpoints();
     </script>
+    <style>
+        .badge {
+            border: none;
+        }
+    </style>
 </head>
 
 <body class="menubar-left menubar-unfold menubar-light theme-primary">
@@ -51,7 +56,7 @@
                         </a>
                     </li>
                     <li>
-                        <h5 class="page-title hidden-menubar-top hidden-float">Dashboard</h5>
+                        <h5 class="page-title hidden-menubar-top hidden-float"><?= $title ?></h5>
                     </li>
                 </ul>
 
@@ -104,34 +109,33 @@
             <div class="menubar-scroll-inner">
                 <ul class="app-menu">
                     <li>
-                        <a href="<?= base_url('dashboard') ?>">
+                        <a href="<?= base_url('petugas') ?>">
                             <i class="menu-icon zmdi zmdi-view-dashboard zmdi-hc-lg"></i>
                             <span class="menu-text">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="<?= base_url('operator/arsip') ?>">
-                            <i class="menu-icon fa fa-Example fa-folder-open"></i>
-                            <span class="menu-text">Arsip Unit</span>
+                        <a href="<?= base_url('petugas/balita') ?>">
+                            <i class="menu-icon fa fa-users"></i>
+                            <span class="menu-text">Balita</span>
                         </a>
                     </li>
                     <li>
-                        <a href="<?= base_url('operator/pinjam') ?>">
-                            <i class="menu-icon fa fa-Example fa-folder-open"></i>
-                            <span class="menu-text">Izin Akses Arsip</span>
+                        <a href="<?= base_url('petugas/periksa') ?>">
+                            <i class="menu-icon fa fa-bar-chart"></i>
+                            <span class="menu-text">Pengukuran</span>
                         </a>
                     </li>
-                    <li class="has-submenu">
-                        <a href="javascript:void(0)" class="submenu-toggle">
-                            <i class="menu-icon glyphicon glyphicon-filter"></i>
-                            <span class="menu-text">Laporan Arsip</span>
-                            <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
+                    <li>
+                        <a href="<?= base_url('petugas/riwayat') ?>">
+                            <i class="menu-icon fa fa-clock-o"></i>
+                            <span class="menu-text">Riwayat Pemeriksaan</span>
                         </a>
-                        <ul class="submenu">
-                            <li><a href="<?= base_url('operator/laporan/harian') ?>"><span class="menu-text">Harian</span></a></li>
-                            <li><a href="<?= base_url('operator/laporan/bulanan') ?>"><span class="menu-text">Bulanan</span></a></li>
-                            <li><a href="<?= base_url('operator/laporan/tahunan') ?>"><span class="menu-text">Tahunan</span></a></li>
-                        </ul>
+                    </li>
+
+
+                    <li class="menu-separator">
+                        <hr>
                     </li>
                 </ul><!-- .app-menu -->
             </div><!-- .menubar-scroll-inner -->

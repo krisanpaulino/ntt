@@ -61,6 +61,18 @@ class MasterModel extends Model
         }
         return $builder->get()->getResultObject();
     }
+    function getDusunByPosyandu($posyandu_id)
+    {
+        // $db = \Config\Database::connect();
+        $builder = $this->db->table('dusun');
+        $builder->join('kelurahan', 'dusun.kelurahan_id = kelurahan.kelurahan_id');
+        $builder->join('posyandu', 'dusun.posyandu_id = posyandu.posyandu_id');
+        if ($posyandu_id != null) {
+            $builder->where('dusun.posyandu_id', $posyandu_id);
+            // return $builder->get()->getRowObject();
+        }
+        return $builder->get()->getResultObject();
+    }
     function subDetail($id)
     {
         $builder = $this->db->table('subkategori');
