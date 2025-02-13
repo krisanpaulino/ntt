@@ -62,6 +62,7 @@ class PetugasModel extends Model
     {
 
         $this->join('user', 'user.user_id = petugas.user_id');
+        $this->join('kelurahan', 'kelurahan.kelurahan_id = petugas.kelurahan_id');
         $this->join('posyandu', 'posyandu.posyandu_id = petugas.posyandu_id');
         if ($petugas_id != null) {
             $this->where('petugas_id', $petugas_id);
@@ -74,6 +75,7 @@ class PetugasModel extends Model
     {
 
         $this->join('user', 'user.user_id = petugas.user_id');
+        $this->join('kelurahan', 'kelurahan.kelurahan_id = petugas.kelurahan_id');
         $this->join('posyandu', 'posyandu.posyandu_id = petugas.posyandu_id');
         if ($user_id != null) {
             $this->where('petugas.user_id', $user_id);
