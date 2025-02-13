@@ -21,8 +21,8 @@ class Home extends BaseController
         // }
         $data['title'] = 'Posyandu';
 
-        return view('auth', $data);
-        // return redirect('auth');
+        // return view('auth', $data);
+        return redirect('auth');
     }
     public function superadmin()
     {
