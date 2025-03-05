@@ -121,7 +121,17 @@
                         </a>
                     </li>
 
-
+                    <li class="menu-separator">
+                        <a class="text-muted">
+                            <small><strong class="text-muted">LAPORAN</strong></small>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url('petugasdesa/peta') ?>">
+                            <i class="menu-icon fa fa-map"></i>
+                            <span class="menu-text">Peta Sebaran Balita</span>
+                        </a>
+                    </li>
                     <li class="menu-separator">
                         <hr>
                     </li>

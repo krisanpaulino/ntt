@@ -126,6 +126,8 @@ $routes->group('admin', ['filter' => 'admin'], static function ($routes) {
 
     $routes->get('cetak-hasil/(:num)/(:num)', 'Antropometri::cetakHasilPdf/$1/$2');
     $routes->get('laporan-hasil/(:num)/(:num)', 'Antropometri::laporanHasil/$1/$2');
+
+    $routes->get('peta', 'Laporan::peta');
 });
 
 $routes->group('petugas', ['filter' => 'petugas'], static function ($routes) {
@@ -166,4 +168,5 @@ $routes->group('petugasdesa', ['filter' => 'petugasdesa'], static function ($rou
     $routes->post('balita/hapus', 'Balita::delete');
     $routes->post('balita/buat-akun', 'Balita::buatAkun');
     $routes->post('laporan-balita', 'Balita::laporanBalita');
+    $routes->get('peta', 'Laporan::peta');
 });

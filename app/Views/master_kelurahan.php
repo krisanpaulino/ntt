@@ -27,6 +27,8 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Nama Kelurahan</th>
+                                        <th>Longitude</th>
+                                        <th>Latitude</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -37,12 +39,14 @@
                                         <tr>
                                             <td><?= $i++ ?></td>
                                             <td><?= $p->kelurahan_nama ?></td>
+                                            <td><?= $p->kelurahan_long ?></td>
+                                            <td><?= $p->kelurahan_lat ?></td>
                                             <td>
                                                 <form action="<?= base_url('superadmin/kelurahan/hapus') ?>" method="post">
                                                     <input type="hidden" name="kelurahan_id" value="<?= $p->kelurahan_id ?>">
                                                     <a href="<?= base_url('superadmin/dusun/' . $p->kelurahan_id) ?>" class="badge bg-primary">Dusun</a>
                                                     <a href="<?= base_url('superadmin/posyandu/' . $p->kelurahan_id) ?>" class="badge bg-info">Posyandu</a>
-                                                    <a href="#" class="badge bg-warning" data-id="<?= $p->kelurahan_id ?>" data-nama="<?= $p->kelurahan_nama ?>" data-toggle="modal" data-target="#edit">Edit</a>
+                                                    <a href="#" class="badge bg-warning" data-id="<?= $p->kelurahan_id ?>" data-nama="<?= $p->kelurahan_nama ?>" data-long="<?= $p->kelurahan_long ?>" data-lat="<?= $p->kelurahan_lat ?>" data-toggle="modal" data-target="#edit">Edit</a>
                                                     <button type="submit" class="badge bg-danger border-0">Hapus</button>
                                                 </form>
                                             </td>
@@ -81,6 +85,27 @@
                             <?php endif; ?>
                         </div>
                     </div>
+                    <hr>
+                    <span><b>Koordinat Tengah Kelurahan</b></span>
+                    <div class="form-group mb-4">
+                        <label for="kelurahan_lat">Latitude</label>
+                        <input type="text" class="form-control <?= (isset(session('errors')['kelurahan_lat'])) ? 'is-invalid' : '' ?>" id="kelurahan_lat" name="kelurahan_lat" value="<?= old('kelurahan_lat') ?>">
+                        <div class="invalid-feedback">
+                            <?php if (isset(session('errors')['kelurahan_lat'])) : ?>
+                                <?= session('errors')['kelurahan_lat'] ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="kelurahan_long">Longitude</label>
+                        <input type="text" class="form-control <?= (isset(session('errors')['kelurahan_long'])) ? 'is-invalid' : '' ?>" id="kelurahan_long" name="kelurahan_long" value="<?= old('kelurahan_long') ?>">
+                        <div class="invalid-feedback">
+                            <?php if (isset(session('errors')['kelurahan_long'])) : ?>
+                                <?= session('errors')['kelurahan_long'] ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="modal-footer">
@@ -113,14 +138,37 @@
                             <?php endif; ?>
                         </div>
                     </div>
+                    <hr>
+                    <span><b>Koordinat Tengah Kelurahan</b></span>
+
+                    <div class="form-group mb-4">
+                        <label for="kelurahan_lat">Latitude</label>
+                        <input type="text" class="form-control <?= (isset(session('errors')['kelurahan_lat'])) ? 'is-invalid' : '' ?>" id="kelurahan_latedit" name="kelurahan_lat" value="">
+                        <div class="invalid-feedback">
+                            <?php if (isset(session('errors')['kelurahan_lat'])) : ?>
+                                <?= session('errors')['kelurahan_lat'] ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="kelurahan_long">Longitude</label>
+                        <input type="text" class="form-control <?= (isset(session('errors')['kelurahan_long'])) ? 'is-invalid' : '' ?>" id="kelurahan_longedit" name="kelurahan_long" value="">
+                        <div class="invalid-feedback">
+                            <?php if (isset(session('errors')['kelurahan_long'])) : ?>
+                                <?= session('errors')['kelurahan_long'] ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Tutup</button>
-                    <button type="sumbit" class="btn btn-warning waves-effect waves-light">Update</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Tutup</button>
+                <button type="sumbit" class="btn btn-warning waves-effect waves-light">Update</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
     </div>
 </form>
 
@@ -136,6 +184,10 @@
         var nama = $(event.relatedTarget).data('nama');
         $(this).find('#kodeitemedit').attr("value", kode);
         $(this).find('#namaitemedit').attr("value", nama);
+        var long = $(event.relatedTarget).data('id');
+        var lat = $(event.relatedTarget).data('nama');
+        $(this).find('#kelurahan_longedit').attr("value", long);
+        $(this).find('#kelurahan_latedit').attr("value", lat);
     });
 </script>
 <?= $this->endSection(); ?>
