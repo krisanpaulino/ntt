@@ -68,11 +68,13 @@ $routes->group('superadmin', ['filter' => 'superadmin'], static function ($route
     $routes->post('petugas/tambah', 'User::storePetugas');
     $routes->get('petugas/(:num)', 'User::detailPetugas/$1');
     $routes->post('petugas/update', 'User::updatePetugas');
+    $routes->post('petugas/hapus', 'User::deletePetugas');
 
     $routes->get('petugas-desa', 'User::petugasdesa');
     $routes->post('petugas-desa/tambah', 'User::storePetugasdesa');
     $routes->get('petugasdesa/(:num)', 'User::detailPetugasdesa/$1');
     $routes->post('petugasdesa/update', 'User::updatePetugasdesa');
+    $routes->post('petugasdesa/hapus', 'User::deletePetugasdesa');
 
     $routes->get('balita', 'Balita::index');
     $routes->get('riwayat-balita/(:num)', 'Periksa::riwayat/$1');
