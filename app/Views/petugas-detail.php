@@ -29,8 +29,8 @@
                             <div class="form-group mb-4">
                                 <label for="petugas_jk">Jenis Kelamin</label>
                                 <select class="form-control <?= (isset(session('errors')['petugas_jk'])) ? 'is-invalid' : '' ?>" id="petugas_jk" name="petugas_jk">
-                                    <option value="L" <?= ($petugas->petugas_jk == 'P') ? 'selected' : '' ?>>P</option>
-                                    <option value="P" <?= ($petugas->petugas_jk == 'L') ? 'selected' : '' ?>>L</option>
+                                    <option value="P" <?= ($petugas->petugas_jk == 'P') ? 'selected' : '' ?>>P</option>
+                                    <option value="L" <?= ($petugas->petugas_jk == 'L') ? 'selected' : '' ?>>L</option>
                                 </select>
                                 <div class="invalid-feedback">
                                     <?php if (isset(session('errors')['petugas_jk'])) : ?>
