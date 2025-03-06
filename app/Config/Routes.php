@@ -97,11 +97,13 @@ $routes->group('admin', ['filter' => 'admin'], static function ($routes) {
     $routes->post('petugas/tambah', 'User::storePetugas');
     $routes->get('petugas/(:num)', 'User::detailPetugas/$1');
     $routes->post('petugas/update', 'User::updatePetugas');
+    $routes->post('petugas/hapus', 'User::deletePetugas');
 
     $routes->get('petugas-desa', 'User::petugasdesa');
     $routes->post('petugas-desa/tambah', 'User::storePetugasdesa');
     $routes->get('petugasdesa/(:num)', 'User::detailPetugasdesa/$1');
     $routes->post('petugasdesa/update', 'User::updatePetugasdesa');
+    $routes->post('petugasdesa/hapus', 'User::deletePetugasdesa');
 
     $routes->get('dusun', 'Master::dusun');
     $routes->post('dusun/update', 'Master::savedusun');

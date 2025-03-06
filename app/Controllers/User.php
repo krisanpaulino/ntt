@@ -143,6 +143,9 @@ class User extends BaseController
         $model = new UserModel();
         $user_id = $this->request->getPost('user_id');
         $model->delete($user_id);
+        $pModel = new PetugasModel();
+        $pModel->where('user_id', $user_id);
+        $pModel->delete();
         return redirect()->to('admin/petugas');
     }
     public function petugasdesa($kelurahan_id = null)
@@ -244,6 +247,9 @@ class User extends BaseController
         $model = new UserModel();
         $user_id = $this->request->getPost('user_id');
         $model->delete($user_id);
+        $pModel = new PetugasdesaModel();
+        $pModel->where('user_id', $user_id);
+        $pModel->delete();
         return redirect()->to('admin/petugasdesa');
     }
 
