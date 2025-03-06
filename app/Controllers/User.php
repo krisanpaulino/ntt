@@ -236,7 +236,7 @@ class User extends BaseController
         // dd($data);
         $model->where('petugasdesa_id', $petugasdesa_id);
         $model->update($petugasdesa_id, $data);
-        dd($model->errors());
+        // dd($model->errors());
         return redirect()->to(previous_url())->with('success', 'Data berhasil diubah');
     }
     public function deletePetugasdesa()
