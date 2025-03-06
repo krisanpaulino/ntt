@@ -63,7 +63,7 @@ class PetugasModel extends Model
 
         $this->join('user', 'user.user_id = petugas.user_id');
         $this->join('posyandu', 'posyandu.posyandu_id = petugas.posyandu_id');
-        $this->join('kelurahan', 'kelurahan.kelurahan_id = petugas.kelurahan_id');
+        $this->join('kelurahan', 'kelurahan.kelurahan_id = posyandu.kelurahan_id');
         if ($petugas_id != null) {
             $this->where('petugas_id', $petugas_id);
             return $this->first();
