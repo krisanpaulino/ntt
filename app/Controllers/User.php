@@ -223,19 +223,19 @@ class User extends BaseController
     }
     public function updatePetugasdesa()
     {
-        $petugas_id = $this->request->getPost('petugas_id');
+        $petugasdesa_id = $this->request->getPost('petugasdesa_id');
         $data = $this->request->getPost();
-        $tgllahir = $this->request->getPost('petugas_tgllahir');
+        $tgllahir = $this->request->getPost('petugasdesa_tgllahir');
         // dd($tgllahir);
         // $date = new DateTime($tgllahir);
         // dd(date('Y-m-d', strtotime($tgllahir)));
-        $data['petugas_tgllahir'] = date('Y-m-d', strtotime($tgllahir));
+        $data['petugasdesa_tgllahir'] = date('Y-m-d', strtotime($tgllahir));
         // dd($data);
         $model = new PetugasModel();
 
         // dd($data);
-        $model->where('petugas_id', $petugas_id);
-        $model->update($petugas_id, $data);
+        $model->where('petugasdesa_id', $petugasdesa_id);
+        $model->update($petugasdesa_id, $data);
         return redirect()->to(previous_url())->with('success', 'Data berhasil diubah');
     }
     public function deletePetugasdesa()
