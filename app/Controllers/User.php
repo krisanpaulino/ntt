@@ -210,12 +210,12 @@ class User extends BaseController
 
     public function detailPetugasdesa($petugas_id)
     {
-        $model = new PetugasModel();
+        $model = new PetugasdesaModel();
         $petugas = $model->findPetugas($petugas_id);
         $model = new PosyanduModel();
         $data = [
             'title' => 'Detail Petugas',
-            'petugas' => $petugas,
+            'petugasdesa' => $petugas,
             'posyandu' => $model->findAll()
         ];
 
