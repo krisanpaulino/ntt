@@ -231,7 +231,7 @@ class User extends BaseController
         // dd(date('Y-m-d', strtotime($tgllahir)));
         $data['petugasdesa_tgllahir'] = date('Y-m-d', strtotime($tgllahir));
         // dd($data);
-        $model = new PetugasModel();
+        $model = new PetugasdesaModel();
 
         // dd($data);
         $model->where('petugasdesa_id', $petugasdesa_id);
