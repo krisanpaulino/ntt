@@ -119,7 +119,7 @@ class User extends BaseController
             'posyandu' => $posyandu
         ];
 
-        return view('pengguna/petugas-detail', $data);
+        return view('petugas-detail', $data);
     }
     public function updatePetugas()
     {
@@ -219,7 +219,7 @@ class User extends BaseController
             'posyandu' => $model->findAll()
         ];
 
-        return view('pengguna/petugas-detail', $data);
+        return view('petugasdesa-detail', $data);
     }
     public function updatePetugasdesa()
     {
