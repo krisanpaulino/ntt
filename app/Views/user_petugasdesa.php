@@ -58,7 +58,7 @@
     </div><!-- END column -->
 </div><!-- .row -->
 <!-- /.container-fluid -->
-<form action="<?= base_url(session('user')->user_type . '/petugas-desa/tambah') ?>" method="post" enctype="multipart/form-data" autocomplete="off">
+<form action="<?= base_url(session('user')->user_type . '/petugasdesa/update') ?>" method="post" enctype="multipart/form-data" autocomplete="off">
     <div id="tambah" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
