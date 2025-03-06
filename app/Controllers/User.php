@@ -146,7 +146,7 @@ class User extends BaseController
         $pModel = new PetugasModel();
         $pModel->where('user_id', $user_id);
         $pModel->delete();
-        return redirect()->to('admin/petugas');
+        return redirect()->to(previous_url())->with('success', 'Data berhasil dihapus');
     }
     public function petugasdesa($kelurahan_id = null)
     {
@@ -250,7 +250,7 @@ class User extends BaseController
         $pModel = new PetugasdesaModel();
         $pModel->where('user_id', $user_id);
         $pModel->delete();
-        return redirect()->to('admin/petugasdesa');
+        return redirect()->to(previous_url())->with('success', 'Data berhasil dihapus');
     }
 
     public function admin()
